@@ -11,7 +11,7 @@ const assignmentPages = Object.fromEntries(
 )
 
 export default defineConfig({
-  base: '/Abhick-2209_Assignment-1-7/',
+  base: '/Pratyush-2237_Assignment-1-7/',
 
   plugins: [
     react(),
