@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f4f7;
+  color: #222;
+}
+
+/* Header */
+.header {
+  background-color: #1e3a8a;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.header h1 {
+  margin-bottom: 8px;
+}
+
+/* Main */
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+main h2 {
+  text-align: center;
+  color: #1e3a8a;
+  margin-bottom: 25px;
+}
+
+/* Sort Button */
+button {
+  display: block;
+  margin: 0 auto 30px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+/* Student List */
+.student-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* Student Card */
+.student-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.student-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.student-info h3 {
+  color: #1e3a8a;
+  margin-bottom: 12px;
+}
+
+.student-info p {
+  margin: 7px 0;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  background-color: #111827;
+  color: white;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .student-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .student-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .student-card img {
+    width: 100px;
+    height: 100px;
+  }
+}
