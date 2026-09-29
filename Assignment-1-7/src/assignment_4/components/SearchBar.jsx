@@ -1,19 +1,21 @@
-import React from "react";
-
-function SearchBar({ city, setCity, searchWeather }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    searchWeather();
-  };
-
+function SearchBar({
+  searchCity,
+  setSearchCity,
+  handleSearch
+}) {
   return (
-    <form className="search-box" onSubmit={handleSubmit}>
+    <form
+      className="search-bar"
+      onSubmit={handleSearch}
+    >
 
       <input
         type="text"
-        placeholder="Enter city name..."
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
+        placeholder="Enter city name"
+        value={searchCity}
+        onChange={(e) =>
+          setSearchCity(e.target.value)
+        }
       />
 
       <button type="submit">

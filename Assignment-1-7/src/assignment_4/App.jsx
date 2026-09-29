@@ -1,37 +1,52 @@
-import React, { useState } from "react";
-import Header from "./components/Header";
+import { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import WeatherCard from "./components/WeatherCard";
-import Footer from "./components/Footer";
-import "./App.css";
+import WeatherStats from "./components/WeatherStats";
 
 function App() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Kolkata");
+  const [searchCity, setSearchCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Put your OpenWeatherMap API key here
-  const API_KEY = "YOUR_API_KEY";
-   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+  const API_KEY =
+    import.meta.env.VITE_WEATHER_API_KEY;
 
-  const searchWeather = async () => {
-    if (!city.trim()) {
-      setError("Please enter a city name.");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-    setWeather(null);
-
+  const fetchWeather = async (cityName) => {
     try {
+      setLoading(true);
+      setError("");
+      setWeather(null);
+
+      if (!API_KEY) {
+        throw new Error(
+          "API key is missing"
+        );
+      }
+
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+          cityName
+        )}&appid=${API_KEY}&units=metric`
       );
 
       if (!response.ok) {
-        throw new Error("City not found.");
+        if (response.status === 404) {
+          throw new Error(
+            "City not found"
+          );
+        }
+
+        if (response.status === 401) {
+          throw new Error(
+            "Invalid API key"
+          );
+        }
+
+        throw new Error(
+          "Unable to fetch weather data"
+        );
       }
 
       const data = await response.json();
@@ -44,39 +59,69 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    fetchWeather(city);
+  }, [city]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    if (searchCity.trim() === "") {
+      setError("Please enter a city name");
+      return;
+    }
+
+    setCity(searchCity.trim());
+    setSearchCity("");
+  };
+
   return (
     <div className="app">
 
-      <Header />
+      <div className="weather-container">
 
-      <main className="container">
+        <h1>
+          Weather Dashboard
+        </h1>
+
+        <p className="subtitle">
+          Check current weather information
+        </p>
 
         <SearchBar
-          city={city}
-          setCity={setCity}
-          searchWeather={searchWeather}
+          searchCity={searchCity}
+          setSearchCity={setSearchCity}
+          handleSearch={handleSearch}
         />
 
         {loading && (
-          <div className="loader-container">
+          <div className="loading">
             <div className="spinner"></div>
-            <p>Loading weather...</p>
+            <p>
+              Loading weather...
+            </p>
           </div>
         )}
 
-        {error && (
+        {error && !loading && (
           <div className="error">
             {error}
           </div>
         )}
 
-        {weather && !loading && (
-          <WeatherCard weather={weather} />
+        {weather && !loading && !error && (
+          <>
+            <WeatherCard
+              weather={weather}
+            />
+
+            <WeatherStats
+              weather={weather}
+            />
+          </>
         )}
 
-      </main>
-
-      <Footer />
+      </div>
 
     </div>
   );

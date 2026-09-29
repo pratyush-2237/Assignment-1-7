@@ -10,12 +10,12 @@ function App() {
   return (
     <>
     <a href="/src/assignment_1/index1.html" target="_blank">Assignment-1</a><br/>
-    <a href="/src/assignment2/index2.html" target="_blank">Assignment-2</a><br/>
-    <a href="/src/assignment3/index3.html" target="_blank">Assignment-3</a><br/>
-    <a href="/src/assignment4/index4.html" target="_blank">Assignment-4</a><br/>
+    <a href="/src/assignment_2/index2.html" target="_blank">Assignment-2</a><br/>
+    <a href="/src/assignment_3/index3.html" target="_blank">Assignment-3</a><br/>
+    <a href="/src/assignment_4/index4.html" target="_blank">Assignment-4</a><br/>
     <a href="/src/assignment_5/index5.html" target="_blank">Assignment-5</a><br/>
     <a href="/src/assignment_6/index6.html" target="_blank">Assignment-6</a><br/>
-    <a href="/src/assignment-7/index7.html" target="_blank">Assignment-7</a><br/>
+    <a href="/src/assignment_7/index7.html" target="_blank">Assignment-7</a><br/>
     </>
   )
 }

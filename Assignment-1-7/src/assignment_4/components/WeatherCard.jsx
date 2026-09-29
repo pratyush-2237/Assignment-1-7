@@ -1,14 +1,7 @@
-import React from "react";
-
 function WeatherCard({ weather }) {
 
-  const sunrise = new Date(
-    weather.sys.sunrise * 1000
-  ).toLocaleTimeString();
-
-  const sunset = new Date(
-    weather.sys.sunset * 1000
-  ).toLocaleTimeString();
+  const iconUrl =
+    `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
 
   return (
     <div className="weather-card">
@@ -18,42 +11,24 @@ function WeatherCard({ weather }) {
       </h2>
 
       <img
-        className="weather-icon"
-        src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+        src={iconUrl}
         alt={weather.weather[0].description}
       />
 
-      <h3 className="temperature">
+      <h3>
         {Math.round(weather.main.temp)}°C
       </h3>
 
-      <p className="description">
+      <p className="weather-description">
         {weather.weather[0].description}
       </p>
 
-      <div className="weather-details">
-
-        <div className="detail">
-          <h4>Humidity</h4>
-          <p>{weather.main.humidity}%</p>
-        </div>
-
-        <div className="detail">
-          <h4>Wind Speed</h4>
-          <p>{weather.wind.speed} m/s</p>
-        </div>
-
-        <div className="detail">
-          <h4>Sunrise</h4>
-          <p>{sunrise}</p>
-        </div>
-
-        <div className="detail">
-          <h4>Sunset</h4>
-          <p>{sunset}</p>
-        </div>
-
-      </div>
+      <p>
+        Feels like{" "}
+        {Math.round(
+          weather.main.feels_like
+        )}°C
+      </p>
 
     </div>
   );
